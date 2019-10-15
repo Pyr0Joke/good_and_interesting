@@ -69,7 +69,7 @@ public class ReportIssue extends StepListener {
 
             Har har = BrowserDriverFactory.proxy.getHar();
 
-            BatFileCreator.createBatFile(har);
+//            BatFileCreator.createBatFile(har);
             for (HarEntry  entry: clearHar(har).getLog().getEntries()){
                     writer.write("Request   ");
                     writer.write(entry.getRequest().getMethod()+"  ");
@@ -106,7 +106,7 @@ public class ReportIssue extends StepListener {
         given().header("X-Atlassian-Token", "nocheck").headers(headerMap).and().body(priorityData).put(BASE_URL + "/issue/" + issueNumber);
         given().headers(headerMap).header("X-Atlassian-Token", "nocheck").and().body("{\"name\":\"{Executor_name}\"}").put(BASE_URL + "/issue/"+issueNumber+"/assignee");
 
-        Allure.issue("http://jira.korona-auto.com/browse/"+issueNumber, "http://jira.{company_name}.com/browse/"+issueNumber);
+        Allure.issue("http://jira.{company_name}.com/browse/"+issueNumber, "http://jira.{company_name}.com/browse/"+issueNumber);
         BrowserDriverFactory.proxy.getHar().getLog().getEntries().clear();
     }
 
