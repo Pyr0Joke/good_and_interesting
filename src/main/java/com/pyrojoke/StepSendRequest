@@ -1,0 +1,5 @@
+        JSONObject body = new JSONObject();
+        body = myBuilder.setParam(param).build().getPostData();
+        RequestBody requestBody = RequestBody.create(body.toString(), MediaType.parse("application/json"));
+        Response response = new CallFactory(respClass, apiVersion, requestBody).getResponse();
+        respClass  = response.body();
