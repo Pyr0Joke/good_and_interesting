@@ -1,0 +1,9 @@
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
+<suite name="Name" configfailurepolicy="continue" parallel="instances" data-provider-thread-count="10" thread-count="10">
+    <test name="Test Name">
+        <classes>
+            <class name="runner.RunnerName">
+            </class>
+        </classes>
+    </test>
+</suite>
