@@ -1,0 +1,33 @@
+import okhttp3.RequestBody;
+import retrofit2.Call;
+import retrofit2.Response;
+import services.Service;
+
+import java.io.IOException;
+
+public class CallFactory {
+    private Object responseClass;
+    private String apiVersion;
+    private RequestBody requestBody;
+    private static Service service = RetrofitClientCreator.getRetrofit().create(Service.class);
+
+    public CallFactory(Object responseClass, String apiVersion, RequestBody requestBody) {
+        this.responseClass = responseClass;
+        this.apiVersion = apiVersion;
+        this.requestBody = requestBody;
+    }
+
+    public Response getResponse() throws IOException {
+        if (responseClass instanceof Class1) {
+            Call<Class1> responseCall;
+            if (!RetrofitClientCreator.getEnv().contains("1"))
+                responseValidateCall = service.sendRequest(apiVersion, requestBody);
+            return responseValidateCall.execute();
+        } else if (responseClass instanceof Class2) {
+            Call<Class2> responseCall;
+            if (!RetrofitClientCreator.getEnv().contains("2"))
+                responseCall = service.sendRequest(apiVersion, requestBody);
+            return responseSuggestionCall.execute();
+        }
+    }
+}
