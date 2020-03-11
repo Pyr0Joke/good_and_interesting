@@ -1,0 +1,28 @@
+import org.json.JSONArray;
+import org.json.JSONObject;
+
+import java.util.Objects;
+import java.util.UUID;
+
+public class PostData {
+    private boolean bool;
+    private String str;
+
+
+    PostDataForValidate(boolean bool,String str) {
+        this.woFlat = bool;
+        this.str = str;
+    }
+
+    public JSONObject getPostDataForValidateApi(){
+        JSONObject postData = new JSONObject();
+        JSONArray valArray = new JSONArray();
+        JSONObject addrObjects = new JSONObject();
+        postData.put("bool",bool);
+        if(Objects.nonNull(str))
+            addrObjects.put("str", str);
+        valArray.put(addrObjects);
+        postData.put("addr",valArray);
+        return postData;
+    }
+}
