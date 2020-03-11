@@ -1,0 +1,39 @@
+
+import cucumber.api.CucumberOptions;
+import cucumber.api.testng.AbstractTestNGCucumberTests;
+import cucumber.api.testng.CucumberFeatureWrapper;
+import cucumber.api.testng.PickleEventWrapper;
+import cucumber.api.testng.TestNGCucumberRunner;
+import listener.CustomListener;
+import org.testng.annotations.*;
+
+
+@CucumberOptions(
+        features = "src/test/resources/features/",
+        glue = "steps"
+)
+@Listeners(CustomListener.class)
+public class TestValidateRunner extends AbstractTestNGCucumberTests {
+
+    private TestNGCucumberRunner testNGCucumberRunner;
+
+    @BeforeClass(alwaysRun = true)
+    public void setUpClass() throws Exception {
+        testNGCucumberRunner = new TestNGCucumberRunner(this.getClass());
+    }
+
+    @Test(dataProvider = "features")
+    public void TestScenario(PickleEventWrapper pickleEvent, CucumberFeatureWrapper cucumberFeature) throws Throwable {
+        testNGCucumberRunner.runScenario(pickleEvent.getPickleEvent());
+    }
+
+    @DataProvider(parallel = true)
+    public Object[][] features() {
+        return testNGCucumberRunner.provideScenarios();
+    }
+
+    @AfterClass(alwaysRun = true)
+    public void tearDownClass() throws Exception {
+        testNGCucumberRunner.finish();
+    }
+}
