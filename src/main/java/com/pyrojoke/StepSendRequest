@@ -3,3 +3,6 @@
         RequestBody requestBody = RequestBody.create(body.toString(), MediaType.parse("application/json"));
         Response response = new CallFactory(respClass, apiVersion, requestBody).getResponse();
         respClass  = response.body();
+
+
+clean test -Dsurefire.suiteXmlFiles=src/test/java/testsuites/suggest.xml
